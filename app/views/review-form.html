@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-sm-6">
+        <form name="reviewForm" class="form-horizontal" role="form" ng-submit="reviewForm.$valid && reviewFormCtrl.addReview(reviewForm)" novalidate>
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label">Title</label>
+
+                <div>
+                    <input type="text" class="form-control" id="title" placeholder="Title" ng-model="reviewFormCtrl.book.title" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="author" class="col-sm-2 control-label">Author</label>
+
+                <div>
+                    <input type="text" class="form-control" id="author" placeholder="Author" ng-model="reviewFormCtrl.book.author" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="isbn" class="col-sm-2 control-label">ISBN</label>
+
+                <div>
+                    <input type="text" class="form-control" id="isbn" placeholder="ISBN10" ng-model="reviewFormCtrl.book.isbn" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="review" class="col-sm-2 control-label">Review</label>
+
+                <div>
+                    <textarea rows="3" class="form-control" id="review" placeholder="Review" ng-model="reviewFormCtrl.book.review"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="rating" class="col-sm-2 control-label">Rating</label>
+
+                <div>
+                    <select class="form-control" id="rating" ng-model="reviewFormCtrl.book.rating" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Genres</label>
+
+                <div style="clear: left;">
+                    <label for="{{genre}}" class="control-label" ng-repeat="genre in genres">
+                        <input type="checkbox" id="{{genre}}" name="genres" ng-model="reviewFormCtrl.book.genres[genre]">
+                        {{genre}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-6">
+        <div class="well" ng-show="reviewFormCtrl.book.isbn">
+            <li class="media">
+                <book-cover b="reviewFormCtrl.book"></book-cover>
+
+                <div class="media-body">
+                    <h4 class="media-heading">{{ reviewFormCtrl.book.title }}</h4>
+                    <cite class="text-muted">Written by {{ reviewFormCtrl.book.author }}</cite>
+
+                    <p class="rating">{{ reviewFormCtrl.book.rating }}/5</p>
+
+                    <p>
+                        {{ reviewFormCtrl.book.review }}
+                    </p>
+
+                    <book-genres genres="reviewFormCtrl.book.genres"></book-genres>
+                </div>
+            </li>
+        </div>
+    </div>
+</div>

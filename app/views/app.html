@@ -1,0 +1,28 @@
+<div class="row" ng-controller="ReadingListController as readingListCtrl">
+
+    <button type="button" class="btn btn-default" ng-click="reviewFormCtrl.showForm = !reviewFormCtrl.showForm">
+        {{ reviewFormCtrl.showForm ? "Cancel" : "Create Review" }}
+    </button>
+    <hr/>
+
+    <review-form books="readingListCtrl.books" genres="readingListCtrl.genres" ng-show="reviewFormCtrl.showForm"></review-form>
+
+    <ul class="media-list">
+        <li class="media" ng-repeat="book in readingListCtrl.books">
+            <book-cover b="book"></book-cover>
+
+            <div class="media-body">
+                <h4 class="media-heading">{{ book.title }}</h4>
+                <cite class="text-muted">Written by {{ book.author }}</cite>
+
+                <p ng-class="{goodRating : book.rating >= 3}" class="rating">{{ book.rating }}/5</p>
+
+                <p>
+                    {{ book.review }}
+                </p>
+
+                <book-genres genres="book.genres"></book-genres>
+            </div>
+        </li>
+    </ul>
+</div>
